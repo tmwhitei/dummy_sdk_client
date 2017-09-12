@@ -3,6 +3,7 @@ package hello;
 import java.net.URISyntaxException;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -47,8 +48,8 @@ public class HelloController {
     }
 
     @RequestMapping("/videoPost")
-    public ResponseEntity postVideo(){
-        return videoApiClient.post(new Video());
+    public ResponseEntity postVideo(@RequestBody Video video){
+        return videoApiClient.post(video);
     }
 
 }
