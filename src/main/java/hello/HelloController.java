@@ -10,6 +10,8 @@ import org.springframework.web.client.RestTemplate;
 
 
 import com.nbcuni.cds.api.sdk.SeriesApiClient;
+import com.nbcuni.cds.api.sdk.VideoApiClient;
+import com.nbcuni.cds.api.sdk.model.Video;
 
 /**
  * Created by 206496764 on 8/11/2017.
@@ -22,7 +24,9 @@ public class HelloController {
 
     private RestTemplate restTemplate = new RestTemplate();
 
-    private SeriesApiClient apiClient = new SeriesApiClient(restTemplate, BASE_URL);
+    private SeriesApiClient seriesApiClient = new SeriesApiClient(restTemplate, BASE_URL);
+
+    private VideoApiClient videoApiClient = new VideoApiClient(restTemplate, BASE_URL);
 
     public HelloController() throws URISyntaxException {
     }
@@ -34,12 +38,17 @@ public class HelloController {
 
     @RequestMapping("/series")
     public ResponseEntity getAll(){
-        return apiClient.getAll();
+        return seriesApiClient.getAll();
     }
 
     @RequestMapping("/seriesByID")
     public ResponseEntity getByID(){
-        return apiClient.getByID(1);
+        return seriesApiClient.getByID(1);
+    }
+
+    @RequestMapping("/videoPost")
+    public ResponseEntity postVideo(){
+        return videoApiClient.post(new Video());
     }
 
 }
